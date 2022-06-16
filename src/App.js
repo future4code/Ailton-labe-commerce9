@@ -1,107 +1,110 @@
-import React, { Component } from "react";
-import Header from "./componentes/Header";
-import { Main } from "./componentes/Main";
-import Footer from "./componentes/Footer";
-import styled from "styled-components";
-import ImgCamiseta from "./img/Camiseta1.jpg";
-import Carrinho from "./componentes/Carrinho/Carrinho";
-
+import React, { Component } from 'react'
+import Header from './componentes/Header'
+import { Main } from './componentes/Main'
+import Footer from './componentes/Footer'
+import styled from 'styled-components'
+import ImgCamiseta from './img/Camiseta1.jpg'
+import Carrinho from './componentes/Carrinho/Carrinho'
+import Busca from './componentes/Busca/Busca'
 const Container = styled.div`
   display: flex;
   flex-direction: column;
   max-width: 100vw;
-`;
+`
 
 export default class App extends Component {
   state = {
-    pagina: "carrinho",
+    pagina: 'carrinho',
+    inputBusca: '',
+    inputPrecoMin: 0,
+    inputPrecoMax: Infinity,
     produtos: [
       {
         id: 1,
-        nomeProduto: "SPACELAB SPACESUIT ONESIE",
+        nomeProduto: 'SPACELAB SPACESUIT ONESIE',
         preco: 300,
-        foto: ImgCamiseta,
+        foto: ImgCamiseta
       },
       {
         id: 2,
-        nomeProduto: "Teste",
+        nomeProduto: 'Teste',
         preco: 300,
-        foto: "https://picsum.photos/id/137/200/200",
+        foto: 'https://picsum.photos/id/137/200/200'
       },
       {
         id: 3,
-        nomeProduto: "Jaqueta",
+        nomeProduto: 'Jaqueta',
         preco: 300,
-        foto: "https://picsum.photos/id/237/200/200",
+        foto: 'https://picsum.photos/id/237/200/200'
       },
       {
         id: 4,
-        nomeProduto: "Jaqueta",
+        nomeProduto: 'Jaqueta',
         preco: 300,
-        foto: "https://picsum.photos/id/937/200/200",
+        foto: 'https://picsum.photos/id/937/200/200'
       },
       {
         id: 5,
-        nomeProduto: "Jaqueta",
+        nomeProduto: 'Jaqueta',
         preco: 300,
-        foto: "https://picsum.photos/id/737/200/200",
+        foto: 'https://picsum.photos/id/737/200/200'
       },
       {
         id: 6,
-        nomeProduto: "Jaqueta",
+        nomeProduto: 'Jaqueta',
         preco: 300,
-        foto: "https://picsum.photos/id/257/200/200",
-      },
+        foto: 'https://picsum.photos/id/257/200/200'
+      }
     ],
     carrinho: [
       {
         id: 1,
-        nomeProduto: "SPACELAB SPACESUIT ONESIE",
+        nomeProduto: 'SPACELAB SPACESUIT ONESIE',
         preco: 300,
-        foto: ImgCamiseta,
+        foto: ImgCamiseta
       },
       {
         id: 2,
-        nomeProduto: "Teste",
+        nomeProduto: 'Teste',
         preco: 300,
-        foto: "https://picsum.photos/id/137/200/200",
-      },
-    ],
-  };
+        foto: 'https://picsum.photos/id/137/200/200'
+      }
+    ]
+  }
 
   onClickMenu1 = () => {
     this.setState({
-      pagina: "home",
-    });
-  };
+      pagina: 'home'
+    })
+  }
 
   onClickMenu2 = () => {
     this.setState({
-      pagina: "carrinho",
-    });
-  };
+      pagina: 'carrinho'
+    })
+  }
 
   onClickMenu3 = () => {
     this.setState({
-      pagina: "buscar",
-    });
-  };
+      pagina: 'buscar'
+    })
+  }
 
   onClickMenu4 = () => {
     this.setState({
-      pagina: "login",
-    });
-  };
+      pagina: 'login'
+    })
+  }
 
   adicionarNoCarrinho = (id) => {
     const adicionarCarrinho = this.state.produtos.filter((item) => {
-      return item.id === id;
-    });
-    const arrayCarrinho = [...this.state.carrinho, adicionarCarrinho[0]];
+      return item.id === id
+    })
+    const arrayCarrinho = [...this.state.carrinho, adicionarCarrinho[0]]
     this.setState({
-      carrinho: arrayCarrinho,
-    });
-  };
+      carrinho: arrayCarrinho
+    })
+  }
 
   onClickRemover = (id) => {
     const ArrayRemover = this.state.carrinho.filter((item, index) => {
@@ -110,6 +113,28 @@ export default class App extends Component {
     this.setState({
       carrinho: ArrayRemover
     })
+  }
+
+  onChangeBusca = (event) => {
+    this.setState({
+      inputBusca: event.target.value
+    })
+  }
+  onChangePrecoMin = (event) => {
+    this.setState({
+      inputPrecoMin: event.target.value
+    })
+  }
+  onChangePrecoMax = (event) => {
+    if (event.target.value !== '') {
+      this.setState({
+        inputPrecoMax: event.target.value
+      })
+    } else {
+      this.setState({
+        inputPrecoMax: Infinity
+      })
+    }
   }
 
   render() {
@@ -121,19 +146,32 @@ export default class App extends Component {
           onClickMenu3={this.onClickMenu3}
           onClickMenu4={this.onClickMenu4}
         />
-        {this.state.pagina === "home" && (
+        {this.state.pagina === 'home' && (
           <Main
             valoresProdutos={this.state.produtos}
             adicionarNoCarrinho={this.adicionarNoCarrinho}
           />
         )}
-        {this.state.pagina === "carrinho" && (
-          <Carrinho Remover={this.onClickRemover} carrinho={this.state.carrinho} />
+        {this.state.pagina === 'carrinho' && (
+          <Carrinho
+            Remover={this.onClickRemover}
+            carrinho={this.state.carrinho}
+          />
         )}
-        {this.state.pagina === "buscar" && console.log("pagina buscar")}
-        {this.state.pagina === "login" && console.log("pagina login")}
+        {this.state.pagina === 'buscar' && (
+          <Busca
+            Produtos={this.state.produtos}
+            InputBusca={this.state.inputBusca}
+            InputPrecoMin={this.state.inputPrecoMin}
+            InputPrecoMax={this.state.inputPrecoMax}
+            Busca={this.onChangeBusca}
+            PrecoMin={this.onChangePrecoMin}
+            PrecoMax={this.onChangePrecoMax}
+          />
+        )}
+        {this.state.pagina === 'login' && console.log('pagina login')}
         <Footer />
       </Container>
-    );
+    )
   }
 }
