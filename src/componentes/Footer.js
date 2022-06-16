@@ -1,9 +1,9 @@
-import React, { Component } from "react";
-import styled from "styled-components";
-import IconInstagram from "../img/Instagram.png";
-import IconDiscord from "../img/discord.png";
-import IconTwitter from "../img/twitter.png";
-import IconYoutube from "../img/youtube.png";
+import React, { Component } from 'react'
+import styled from 'styled-components'
+import IconInstagram from '../img/Instagram.png'
+import IconDiscord from '../img/discord.png'
+import IconTwitter from '../img/twitter.png'
+import IconYoutube from '../img/youtube.png'
 
 const FooterUm = styled.footer`
   display: grid;
@@ -14,18 +14,18 @@ const FooterUm = styled.footer`
   height: 350px;
   color: white;
   gap: 20px;
-`;
+`
 const FooterEnd = styled.div`
   display: flex;
   align-items: flex-end;
   gap: 20px;
   grid-area: 2/1/3/4;
   justify-content: center;
-`;
+`
 const FooterLeft = styled.div`
   grid-area: 1/1/2/2;
   padding: 20px 40px;
-`;
+`
 
 const FooterCenter = styled.div`
   grid-area: 1/2/2/3;
@@ -33,11 +33,11 @@ const FooterCenter = styled.div`
   justify-content: center;
   align-items: center;
   user-select: none;
-  p{
+  p {
     font-size: 32px;
     font-weight: 700;
   }
-`;
+`
 
 const FooterRight = styled.div`
   grid-area: 1/3/2/4;
@@ -45,13 +45,13 @@ const FooterRight = styled.div`
   display: grid;
 
   justify-content: end;
-`;
+`
 const Sociais = styled.div`
   display: flex;
   align-items: center;
   justify-content: end;
   gap: 8px;
-`;
+`
 
 export default class Footer extends Component {
   render() {
@@ -93,6 +93,6 @@ export default class Footer extends Component {
           <p>Carlos Sousa</p>
         </FooterEnd>
       </FooterUm>
-    );
+    )
   }
 }
