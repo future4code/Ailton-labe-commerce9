@@ -63,6 +63,13 @@ const AdicionarCarrinho = styled.div`
   font-size: 18px;
   @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap");
   font-family: "Roboto", sans-serif;
+  cursor: pointer;
+  :hover{
+  opacity: 0.7;
+  }
+  :active{
+    background-color: grey;
+  }
   img {
     width: 24px;
   }

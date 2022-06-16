@@ -53,7 +53,20 @@ export default class App extends Component {
         foto: "https://picsum.photos/id/257/200/200",
       },
     ],
-    carrinho: [],
+    carrinho: [
+      {
+        id: 1,
+        nomeProduto: "SPACELAB SPACESUIT ONESIE",
+        preco: 300,
+        foto: ImgCamiseta,
+      },
+      {
+        id: 2,
+        nomeProduto: "Teste",
+        preco: 300,
+        foto: "https://picsum.photos/id/137/200/200",
+      },
+    ],
   };
 
   onClickMenu1 = () => {
@@ -90,6 +103,15 @@ export default class App extends Component {
     });
   };
 
+  onClickRemover = (id) => {
+    const ArrayRemover = this.state.carrinho.filter((item, index) => {
+      return index !== id
+    })
+    this.setState({
+      carrinho: ArrayRemover
+    })
+  }
+
   render() {
     return (
       <Container>
@@ -106,7 +128,7 @@ export default class App extends Component {
           />
         )}
         {this.state.pagina === "carrinho" && (
-          <Carrinho carrinho={this.state.carrinho} />
+          <Carrinho Remover={this.onClickRemover} carrinho={this.state.carrinho} />
         )}
         {this.state.pagina === "buscar" && console.log("pagina buscar")}
         {this.state.pagina === "login" && console.log("pagina login")}
