@@ -89,7 +89,11 @@ export const Cards = (props) => {
           <Camisetas src={item.foto} alt=""></Camisetas>
           <h3>{item.nomeProduto}</h3>
           <h4>R${item.preco},00</h4>
-          <AdicionarCarrinho onClick={ ()=> {props.adicionarNoCarrinho(item.id)}}>
+          <AdicionarCarrinho
+            onClick={() => {
+              props.adicionarNoCarrinho(item.id);
+            }}
+          >
             <p>Adicionar ao carrinho</p>
             <img src={Carrinho} alt=""></img>
           </AdicionarCarrinho>

@@ -14,21 +14,21 @@ const ContainerList = styled.div`
   min-height: 200px;
 `;
 
-export const ProdutoAdicionado = (props) =>{
+export const ProdutoAdicionado = (props) => {
   // const arrayProdutos = props.carrinho.map(()=>{
 
   // })
-return <p></p>
-}
+  return <p></p>;
+};
 
 export default class Carrinho extends Component {
   render() {
-    console.log(this.props.carrinho)
+    console.log(this.props.carrinho);
     return (
       <>
         <ContainerCarrinho>
           <ContainerList>
-            <ProdutoAdicionado carrinho={this.props.carrinho}/>
+            <ProdutoAdicionado carrinho={this.props.carrinho} />
           </ContainerList>
         </ContainerCarrinho>
       </>
