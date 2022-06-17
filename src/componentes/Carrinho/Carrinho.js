@@ -6,41 +6,51 @@ const ContainerCarrinho = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  background-color: #c1c0c5;
   flex-direction: column;
+  padding: 20px 0;
 `;
 
 const ContainerList = styled.div`
-
   width: 600px;
   min-height: 200px;
   display: flex;
   flex-direction: column;
   gap: 10px;
+  @media screen and (max-width: 480px) {
+    width: 300px;
+  }
 `;
 
 const CardBox = styled.div`
-background-color: white;
-display: grid;
-grid-template-columns: 112px 240px 80px;
-justify-content: center;
-align-items: center;
-padding: 8px;
-gap: 8px;
-box-shadow: 0 0 4px black;
-img {
-  width: 100px;
-}
-button {
-  padding: 10px;
-  border: none;
-  border-radius: 8px;
-  &:hover{
-    background-color: #999;
+  background-color: white;
+  display: grid;
+  grid-template-columns: 112px 240px 80px;
+  justify-content: center;
+  align-items: center;
+  padding: 8px;
+  gap: 8px;
+  box-shadow: 0 0 4px black;
+  img {
+    height: 100px;
   }
-}
-`
+  button {
+    padding: 10px;
+    border: none;
+    border-radius: 8px;
+    &:hover {
+      background-color: #999;
+    }
+  }
+  @media screen and (max-width: 480px) {
+    display: flex;
+    flex-direction: column;
+  }
+`;
+
 const ContainerPrecoTotal = styled.div`
   background-color: black;
+  margin: 4px 0;
   color: white;
   border: 1px solid gray;
   width: 600px;
@@ -48,43 +58,53 @@ const ContainerPrecoTotal = styled.div`
   justify-content: end;
   align-items: flex-end;
   flex-direction: column;
-  p{
+  p {
     margin-right: 12px;
   }
-`
-export const ProdutoAdicionado = (props) => {
+  @media screen and (max-width: 480px) {
+    width: 300px;
+  }
+`;
 
-   const arrayProdutos = props.carrinho.map((item, index)=>{
+export const ProdutoAdicionado = (props) => {
+  const arrayProdutos = props.carrinho.map((item, index) => {
     return (
       <CardBox key={index}>
-        <img src={item.foto} alt="foto"/>
+        <img src={item.foto} alt="foto" />
         <div>
           <p>{item.nomeProduto}</p>
           <p>R${item.preco},00</p>
         </div>
-        <button onClick={() => {props.Remover(index)}}>Remover</button>
+        <button
+          onClick={() => {
+            props.Remover(index);
+          }}
+        >
+          Remover
+        </button>
       </CardBox>
-    )
-   })
+    );
+  });
   return arrayProdutos;
 };
 
 export default class Carrinho extends Component {
   render() {
-    console.log(this.props.carrinho);
-
-    const precos = this.props.carrinho.map((item) =>{
-      return item.preco
-    })
-    let soma = 0
-    for(let i = 0; i<precos.length; i++){
-      soma += precos[i]
+    const precos = this.props.carrinho.map((item) => {
+      return item.preco;
+    });
+    let soma = 0;
+    for (let i = 0; i < precos.length; i++) {
+      soma += precos[i];
     }
     return (
       <>
         <ContainerCarrinho>
           <ContainerList>
-            <ProdutoAdicionado carrinho={this.props.carrinho}  Remover={this.props.Remover}/>    
+            <ProdutoAdicionado
+              carrinho={this.props.carrinho}
+              Remover={this.props.Remover}
+            />
           </ContainerList>
           <ContainerPrecoTotal>
             <p>Valor total: R${soma},00</p>
