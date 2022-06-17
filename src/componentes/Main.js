@@ -56,6 +56,12 @@ const Card = styled.div`
   flex-direction: column;
   align-items: center;
   box-shadow: 2px 2px 4px;
+  transform: rotateX(20deg);
+  transition: 0.3s;
+  :hover {
+    transform: rotateX(0deg);
+    transition: 0.3s;
+  }
   h3,
   h4 {
     margin: 4px;

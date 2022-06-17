@@ -73,6 +73,7 @@ export const ProdutoAdicionado = (props) => {
         <img src={item.foto} alt="foto" />
         <div>
           <p>{item.nomeProduto}</p>
+          <p>Quantidade: {props.carrinhoQnt[item.id]} </p>
           <p>R${item.preco},00</p>
         </div>
         <button
@@ -90,12 +91,12 @@ export const ProdutoAdicionado = (props) => {
 
 export default class Carrinho extends Component {
   render() {
-    const precos = this.props.carrinho.map((item) => {
-      return item.preco;
+    const carrinhoSoma = this.props.carrinho.map((item) => {
+      return item.preco * this.props.carrinhoQnt[item.id];
     });
     let soma = 0;
-    for (let i = 0; i < precos.length; i++) {
-      soma += precos[i];
+    for (const item of carrinhoSoma) {
+      soma += item;
     }
     return (
       <>
@@ -103,6 +104,7 @@ export default class Carrinho extends Component {
           <ContainerList>
             <ProdutoAdicionado
               carrinho={this.props.carrinho}
+              carrinhoQnt={this.props.carrinhoQnt}
               Remover={this.props.Remover}
             />
           </ContainerList>
