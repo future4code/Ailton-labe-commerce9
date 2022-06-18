@@ -1,4 +1,9 @@
-Sejam bem vindos ao Labe-commerce, esse repositório contém um esqueleto de app React e um .gitignore.
+Nosso repositório contém um projeto relacionado a um E-Commerce. Criado com (React.js).
+Nele, há uma barra de buscas inteligente, com filtro de preços e ordem crescente e decrescente.
+O usuário pode navegar no site através dos menus disponíveis. As funções se encontram no mesmo.
+O projeto foi criado e desenvolvido pelos integrantes: Paulo Henrique, Antônio Carlos e Sávio Henriques
+
+
 
 
 ### Link do Surge
