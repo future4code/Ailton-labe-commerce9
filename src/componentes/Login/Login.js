@@ -47,7 +47,7 @@ const Input = styled.input`
 export default class Login extends Component {
   render() {
     return (
-      <ContainerLogin>
+      <ContainerLogin role="Caixa de login">
         <CampoInput>
           <h2>Login</h2>
           <DivInput>

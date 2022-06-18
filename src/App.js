@@ -26,7 +26,7 @@ export default class App extends Component {
     pagina: "home",
     inputBusca: "",
     inputPrecoMin: "",
-    selectOrdernar: "",
+    selectOrdernar: "Crescente",
     inputPrecoMax: Infinity,
     produtos: [
       {
@@ -67,6 +67,7 @@ export default class App extends Component {
       },
     ],
     carrinho: [],
+    carrinhoQnt: [],
   };
 
   onClickMenu1 = () => {
@@ -82,6 +83,11 @@ export default class App extends Component {
   };
 
   onClickMenu3 = () => {
+    if (this.state.pagina !== "buscar") {
+      this.setState({
+        produtos: this.state.produtos.sort((a, b) => a.preco - b.preco),
+      });
+    }
     this.setState({
       pagina: "buscar",
     });
@@ -97,18 +103,63 @@ export default class App extends Component {
     const adicionarCarrinho = this.state.produtos.filter((item) => {
       return item.id === id;
     });
-    const arrayCarrinho = [...this.state.carrinho, adicionarCarrinho[0]];
-    this.setState({
-      carrinho: arrayCarrinho,
-    });
+    let temNoCarrinho = false;
+    for (const item of this.state.carrinho) {
+      if (id === item.id) {
+        temNoCarrinho = true;
+      }
+    }
+    if (temNoCarrinho === false) {
+      const arrayCarrinho = [...this.state.carrinho, adicionarCarrinho[0]];
+      const qnt = [...this.state.carrinhoQnt];
+      qnt[id] = 1;
+      this.setState({
+        carrinho: arrayCarrinho,
+        carrinhoQnt: qnt,
+      });
+    } else {
+      const qnt = [...this.state.carrinhoQnt];
+      qnt[id] = this.state.carrinhoQnt[id] + 1;
+      this.setState({
+        carrinhoQnt: qnt,
+      });
+    }
   };
 
   onClickRemover = (id) => {
+    const idProduto = this.state.carrinho
+      .filter((item, index) => {
+        return id === index;
+      })
+      .map((item) => {
+        return item.id;
+      });
+    let qnt = this.state.carrinhoQnt;
+    qnt[idProduto[0]]--;
+    if (qnt[idProduto[0]] <= 0) {
+      const ArrayRemover = this.state.carrinho.filter((item, index) => {
+        return index !== id;
+      });
+      this.setState({
+        carrinho: ArrayRemover,
+      });
+    } else {
+      this.setState({
+        carrinhoQnt: qnt,
+      });
+    }
+  };
+  onClickRemoverTudo = (id) => {
+    let qnt = this.state.carrinhoQnt;
+    qnt[id] = 0;
     const ArrayRemover = this.state.carrinho.filter((item, index) => {
       return index !== id;
     });
     this.setState({
       carrinho: ArrayRemover,
+    });
+    this.setState({
+      carrinhoQnt: qnt,
     });
   };
 
@@ -140,7 +191,38 @@ export default class App extends Component {
     this.setState({
       selectOrdernar: event.target.value,
     });
+    if (event.target.value === "Crescente") {
+      this.setState({
+        produtos: this.state.produtos.sort((a, b) => a.preco - b.preco),
+      });
+    }
+    if (event.target.value === "Decrescente") {
+      this.setState({
+        produtos: this.state.produtos.sort((a, b) => b.preco - a.preco),
+      });
+    }
   };
+
+  componentDidMount() {
+    if (localStorage.getItem("carrinho")) {
+      const converterCarrinho = JSON.parse(localStorage.getItem("carrinho"));
+      this.setState({
+        carrinho: converterCarrinho,
+      });
+    }
+    if (localStorage.getItem("carrinhoQnt")) {
+      const converterCarrinhoQnt = JSON.parse(
+        localStorage.getItem("carrinhoQnt")
+      );
+      this.setState({
+        carrinhoQnt: converterCarrinhoQnt,
+      });
+    }
+  }
+  componentDidUpdate() {
+    localStorage.setItem("carrinho", JSON.stringify(this.state.carrinho));
+    localStorage.setItem("carrinhoQnt", JSON.stringify(this.state.carrinhoQnt));
+  }
 
   render() {
     return (
@@ -161,18 +243,21 @@ export default class App extends Component {
 
         {this.state.pagina === "carrinho" && (
           <Carrinho
+            adicionarNoCarrinho={this.adicionarNoCarrinho}
             Remover={this.onClickRemover}
+            RemoverTudo={this.onClickRemoverTudo}
+            carrinhoQnt={this.state.carrinhoQnt}
             carrinho={this.state.carrinho}
           />
         )}
 
         {this.state.pagina === "buscar" && (
           <Busca
+            adicionarNoCarrinho={this.adicionarNoCarrinho}
             Produtos={this.state.produtos}
             InputBusca={this.state.inputBusca}
             InputPrecoMin={this.state.inputPrecoMin}
             InputPrecoMax={this.state.inputPrecoMax}
-            SelectOrdenar={this.state.selectOrdernar}
             Busca={this.onChangeBusca}
             PrecoMin={this.onChangePrecoMin}
             PrecoMax={this.onChangePrecoMax}

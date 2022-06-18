@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import styled from "styled-components";
+import Carrinho from "../../img/Carrinho.png";
 
 const ContainerBusca = styled.div`
   display: flex;
@@ -52,7 +53,7 @@ const ContainerResultado = styled.div`
 const CardResultado = styled.div`
   display: grid;
   grid-template-columns: 190px;
-  grid-template-rows: 200px 40px 40px;
+  grid-template-rows: 200px 40px 40px 60px;
   flex-direction: column;
   align-items: center;
   justify-content: center;
@@ -77,6 +78,34 @@ const InputBuscar = styled.input`
   }
 `;
 
+const AdicionarCarrinho = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* border: 1px solid black; */
+  border-radius: 12px;
+  user-select: none;
+  @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap");
+  font-family: "Roboto", sans-serif;
+  cursor: pointer;
+  :hover {
+    opacity: 0.7;
+  }
+  :active {
+    background-color: grey;
+  }
+  p {
+    margin: 0;
+  }
+  img {
+    height: 20px;
+    margin: 0;
+  }
+  :hover {
+    text-decoration: underline;
+  }
+`;
+
 export default class Busca extends Component {
   render() {
     const arrayProdutos = this.props.Produtos.filter((item) => {
@@ -94,17 +123,26 @@ export default class Busca extends Component {
     const arrayResultadoProdutos = arrayProdutos.map((item) => {
       return (
         <CardResultado key={item.id}>
-          <img src={item.foto} />
+          <img src={item.foto} alt="foto do produto" />
           <p>{item.nomeProduto}</p>
           <p>R${item.preco},00</p>
+          <AdicionarCarrinho
+            onClick={() => {
+              this.props.adicionarNoCarrinho(item.id);
+            }}
+          >
+            <p>Adicionar ao carrinho</p>
+            <img src={Carrinho} alt="ícone de carrinho"></img>
+          </AdicionarCarrinho>
         </CardResultado>
       );
     });
     return (
-      <ContainerBusca>
+      <ContainerBusca role="Caixa de filtragem e pesquisa">
         <ContainerFiltro>
           <div>
             <InputBuscar
+              role="campo de busca"
               onChange={this.props.Busca}
               value={this.props.InputBusca}
               placeholder="Buscar"
@@ -126,7 +164,6 @@ export default class Busca extends Component {
               placeholder="Preço máximo"
             />
             <select onChange={this.props.SelectOrdernar}>
-              <option>- Ordenar -</option>
               <option>Crescente</option>
               <option>Decrescente</option>
             </select>
