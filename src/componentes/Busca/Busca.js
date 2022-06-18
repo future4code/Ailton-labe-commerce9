@@ -123,7 +123,7 @@ export default class Busca extends Component {
     const arrayResultadoProdutos = arrayProdutos.map((item) => {
       return (
         <CardResultado key={item.id}>
-          <img src={item.foto} />
+          <img src={item.foto} alt="foto do produto" />
           <p>{item.nomeProduto}</p>
           <p>R${item.preco},00</p>
           <AdicionarCarrinho
@@ -132,16 +132,17 @@ export default class Busca extends Component {
             }}
           >
             <p>Adicionar ao carrinho</p>
-            <img src={Carrinho} alt=""></img>
+            <img src={Carrinho} alt="ícone de carrinho"></img>
           </AdicionarCarrinho>
         </CardResultado>
       );
     });
     return (
-      <ContainerBusca>
+      <ContainerBusca role="Caixa de filtragem e pesquisa">
         <ContainerFiltro>
           <div>
             <InputBuscar
+              role="campo de busca"
               onChange={this.props.Busca}
               value={this.props.InputBusca}
               placeholder="Buscar"

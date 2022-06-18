@@ -122,7 +122,7 @@ export const Cards = (props) => {
             }}
           >
             <p>Adicionar ao carrinho</p>
-            <img src={Carrinho} alt=""></img>
+            <img src={Carrinho} alt="foto do produto"></img>
           </AdicionarCarrinho>
         </Card>
       );

@@ -114,7 +114,7 @@ const Sociais = styled.div`
 export default class Footer extends Component {
   render() {
     return (
-      <FooterUm>
+      <FooterUm role="Rodapé da página">
         <FooterLeft>
           <p>Contatos</p>
           <p>FAQ</p>
@@ -130,7 +130,7 @@ export default class Footer extends Component {
             <a href="https://www.instagram.com/labenu_/" target="blank">
               Instagram
             </a>
-            <img src={IconInstagram} alt=""></img>
+            <img src={IconInstagram} alt="ícone do instagram"></img>
           </Sociais>
           <Sociais>
             <a
@@ -139,19 +139,19 @@ export default class Footer extends Component {
             >
               Discord
             </a>
-            <img src={IconDiscord} alt=""></img>
+            <img src={IconDiscord} alt="ícone do discord"></img>
           </Sociais>
           <Sociais>
             <a href="https://twitter.com/labenu_" target="blank">
               Twitter
             </a>
-            <img src={IconTwitter} alt=""></img>
+            <img src={IconTwitter} alt="ícone do twitter"></img>
           </Sociais>
           <Sociais>
             <a href="https://www.youtube.com/c/labenu" target="blank">
               Youtube
             </a>
-            <img src={IconYoutube} alt=""></img>
+            <img src={IconYoutube} alt="ícone do youtube"></img>
           </Sociais>
         </FooterRight>
 

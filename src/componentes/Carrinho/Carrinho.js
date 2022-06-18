@@ -104,7 +104,7 @@ export const ProdutoAdicionado = (props) => {
   const arrayProdutos = props.carrinho.map((item, index) => {
     return (
       <CardBox key={index}>
-        <img src={item.foto} alt="foto" />
+        <img src={item.foto} alt="foto do produto" />
         <div>
           <p>{item.nomeProduto}</p>
           <DivQnt>
