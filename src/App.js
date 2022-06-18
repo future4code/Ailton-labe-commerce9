@@ -149,6 +149,19 @@ export default class App extends Component {
       });
     }
   };
+  onClickRemoverTudo = (id) => {
+    let qnt = this.state.carrinhoQnt;
+    qnt[id] = 0;
+    const ArrayRemover = this.state.carrinho.filter((item, index) => {
+      return index !== id;
+    });
+    this.setState({
+      carrinho: ArrayRemover,
+    });
+    this.setState({
+      carrinhoQnt: qnt,
+    });
+  };
 
   onChangeBusca = (event) => {
     this.setState({
@@ -207,8 +220,8 @@ export default class App extends Component {
     }
   }
   componentDidUpdate() {
-    localStorage.setItem("carrinho", JSON.stringify(this.state.carrinho))
-    localStorage.setItem("carrinhoQnt", JSON.stringify(this.state.carrinhoQnt))
+    localStorage.setItem("carrinho", JSON.stringify(this.state.carrinho));
+    localStorage.setItem("carrinhoQnt", JSON.stringify(this.state.carrinhoQnt));
   }
 
   render() {
@@ -230,7 +243,9 @@ export default class App extends Component {
 
         {this.state.pagina === "carrinho" && (
           <Carrinho
+            adicionarNoCarrinho={this.adicionarNoCarrinho}
             Remover={this.onClickRemover}
+            RemoverTudo={this.onClickRemoverTudo}
             carrinhoQnt={this.state.carrinhoQnt}
             carrinho={this.state.carrinho}
           />
