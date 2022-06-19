@@ -65,8 +65,8 @@ export default class Header extends Component {
         <Nav>
           <Lista>
             <li onClick={this.props.onClickMenu1}>Home</li>
-            <li onClick={this.props.onClickMenu2}>carrinho</li>
-            <li onClick={this.props.onClickMenu3}>buscar</li>
+            <li onClick={this.props.onClickMenu2}>Carrinho</li>
+            <li onClick={this.props.onClickMenu3}>Buscar</li>
             <li onClick={this.props.onClickMenu4}>Login</li>
           </Lista>
         </Nav>

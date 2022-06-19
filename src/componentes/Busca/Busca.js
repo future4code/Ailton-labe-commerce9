@@ -168,6 +168,7 @@ export default class Busca extends Component {
               <option>Decrescente</option>
             </select>
           </Filtros>
+          {arrayProdutos.length?<p>Resultados: {arrayProdutos.length} produtos encontrados.</p>:<p>Resultados: nenhum produto encontrado.</p>}
         </ContainerFiltro>
         <ContainerResultado>{arrayResultadoProdutos}</ContainerResultado>
       </ContainerBusca>
