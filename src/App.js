@@ -149,6 +149,7 @@ export default class App extends Component {
       });
     }
   };
+
   onClickRemoverTudo = (id) => {
     let qnt = this.state.carrinhoQnt;
     qnt[id] = 0;

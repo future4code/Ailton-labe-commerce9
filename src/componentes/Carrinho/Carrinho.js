@@ -22,6 +22,17 @@ const ContainerList = styled.div`
   }
 `;
 
+const CardBoxEmpty = styled.div`
+  background-color: white;
+  display: grid;
+  grid-template-rows: 185px;
+  justify-content: center;
+  align-items: center;
+  padding: 8px;
+  gap: 8px;
+  box-shadow: 0 0 4px black;
+`;
+
 const CardBox = styled.div`
   background-color: white;
   display: grid;
@@ -82,6 +93,20 @@ const AddRm = styled.p`
   }
 `;
 
+const FinalizarCompra = styled.p`
+  background-color: #242424;
+  padding: 6px;
+  border-radius: 12px;
+  user-select: none;
+  :hover {
+    background-color: #303030;
+  }
+  :active {
+    background-color: white;
+    color: black;
+  }
+`;
+
 const ContainerPrecoTotal = styled.div`
   background-color: black;
   margin: 4px 0;
@@ -90,10 +115,10 @@ const ContainerPrecoTotal = styled.div`
   width: 600px;
   display: flex;
   justify-content: end;
-  align-items: flex-end;
-  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
   p {
-    margin-right: 12px;
+    margin: 12px;
   }
   @media screen and (max-width: 480px) {
     width: 300px;
@@ -156,15 +181,21 @@ export default class Carrinho extends Component {
       <>
         <ContainerCarrinho>
           <ContainerList>
-            <ProdutoAdicionado
-              adicionarNoCarrinho={this.props.adicionarNoCarrinho}
-              carrinho={this.props.carrinho}
-              carrinhoQnt={this.props.carrinhoQnt}
-              Remover={this.props.Remover}
-              RemoverTudo={this.props.RemoverTudo}
-            />
+            {this.props.carrinho.length === 0 && (
+              <CardBoxEmpty>Carrinho Vazio</CardBoxEmpty>
+            )}
+            {this.props.carrinho.length > 0 && (
+              <ProdutoAdicionado
+                adicionarNoCarrinho={this.props.adicionarNoCarrinho}
+                carrinho={this.props.carrinho}
+                carrinhoQnt={this.props.carrinhoQnt}
+                Remover={this.props.Remover}
+                RemoverTudo={this.props.RemoverTudo}
+              />
+            )}
           </ContainerList>
           <ContainerPrecoTotal>
+            <FinalizarCompra>Finalizar Compra</FinalizarCompra>
             <p>Valor total: R${soma},00</p>
           </ContainerPrecoTotal>
         </ContainerCarrinho>
